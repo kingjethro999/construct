@@ -1,19 +1,4 @@
 services:
-  # The MySQL Database (Deployed as a Private Service)
-  - type: pserv
-    name: fashion-designer-db
-    env: docker
-    dockerfilePath: ./Dockerfile.mysql
-    disk:
-      name: mysql-data
-      mountPath: /var/lib/mysql
-      sizeGB: 1
-    envVars:
-      - key: MYSQL_ROOT_PASSWORD
-        generateValue: true
-      - key: MYSQL_DATABASE
-        value: fashion_designer
-
   # The PHP Application (Deployed as a Web Service)
   - type: web
     name: fashion-designer-app
@@ -21,16 +6,14 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DB_HOST
-        fromService:
-          type: pserv
-          name: fashion-designer-db
-          property: host
+        value: "mysql-95ad972-thisiskingjethro-3be3.b.aivencloud.com"
+      - key: DB_PORT
+        value: "21723"
       - key: DB_USER
-        value: root
+        value: "avnadmin"
       - key: DB_PASS
-        fromService:
-          type: pserv
-          name: fashion-designer-db
-          envVarKey: MYSQL_ROOT_PASSWORD
+        value: "AVNS__QSThIrRML7Pl85aWhR"
       - key: DB_NAME
-        value: fashion_designer
+        value: "defaultdb"
+      - key: DB_SSL
+        value: "true"
