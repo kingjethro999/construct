@@ -1,0 +1,5 @@
+FROM mysql:8.0
+
+# Copy the schema file into the special init directory
+# MySQL will automatically run this script on the first startup
+COPY fashion-designer/schema.sql /docker-entrypoint-initdb.d/schema.sql
